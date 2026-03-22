@@ -1,1 +1,630 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Food Delivery Prediction</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+/* BACKGROUND */
+
+body{
+background:
+linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.9)),
+url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+}
+
+/* HEADER */
+
+header{
+background:#ff4d4d;
+padding:15px;
+text-align:center;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:15px;
+background:#111;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:16px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#ff4d4d;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:220px 20px;
+}
+
+.hero h2{
+font-size:42px;
+font-weight:700;
+}
+
+.hero p{
+margin:15px 0;
+font-size:18px;
+}
+
+button{
+padding:12px 25px;
+background:#ff4d4d;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#e60000;
+transform:scale(1.05);
+}
+
+/* SECTION */
+
+.section{
+padding:80px 120px;
+}
+
+/* GLASS CARD */
+
+.glass-card{
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+margin-bottom:40px;
+}
+
+/* TEXT */
+
+.glass-card h2{
+font-size:28px;
+margin-bottom:15px;
+}
+
+.glass-card p{
+font-size:15px;
+line-height:1.7;
+color:#ddd;
+}
+
+/* FLEX */
+
+.flex{
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+}
+
+/* LIST */
+
+.algo-list li{
+margin:10px 0;
+}
+
+.highlight{
+color:#00e676;
+font-weight:600;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th{
+background:linear-gradient(90deg,#ff4d4d,#ff1a1a);
+padding:14px;
+}
+
+td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+tr:hover{
+background:rgba(255,255,255,0.08);
+}
+
+.best{
+background:rgba(0,255,150,0.1);
+}
+
+/* IMAGE */
+
+.food-img{
+width:100%;
+border-radius:12px;
+margin-top:20px;
+}
+
+/* TECH STACK */
+
+.tech span{
+display:inline-block;
+background:#ff4d4d;
+padding:8px 12px;
+margin:5px;
+border-radius:20px;
+font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+padding:30px;
+text-align:center;
+margin-top:50px;
+opacity:0.8;
+}
+
+/* FADE */
+
+.fade-section{
+opacity:0;
+transform:translateY(40px);
+transition:all 1s ease;
+}
+
+.fade-section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* FOOD SECTION IMPROVEMENT */
+
+.food-container{
+display:flex;
+align-items:center;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.food-text{
+flex:1;
+}
+
+.food-image{
+flex:1;
+text-align:center;
+}
+
+.food-image img{
+width:90%;
+max-width:400px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.6);
+transition:0.4s;
+}
+
+.food-image img:hover{
+transform:scale(1.05);
+}
+
+/* POINTS ANIMATION */
+
+.food-points{
+list-style:none;
+margin-top:20px;
+}
+
+.food-points li{
+margin:12px 0;
+font-size:16px;
+padding:10px;
+background:rgba(255,255,255,0.05);
+border-radius:8px;
+transition:0.3s;
+}
+
+.food-points li:hover{
+background:#ff4d4d;
+transform:translateX(10px);
+}
+
+
+/* FEATURES GRID */
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:20px;
+}
+
+.feature-box{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:10px;
+transition:0.3s;
+}
+
+.feature-box:hover{
+background:#ff4d4d;
+transform:translateY(-8px);
+}
+
+.feature-box h3{
+margin-bottom:10px;
+}
+
+
+/* BETTER HEADINGS SPACING */
+
+.glass-card h2{
+font-size:28px;
+margin-bottom:20px;
+letter-spacing:0.5px;
+}
+
+/* FEATURE TEXT */
+
+.feature-box p{
+font-size:14px;
+line-height:1.6;
+color:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+{% for m in get_flashed_messages() %}
+<script>alert("{{m}}")</script>
+{% endfor %}
+
+<header>
+<h1>Food Delivery Time Prediction</h1>
+</header>
+
+<nav>
+<a href="{{ url_for('home') }}">Home</a>
+<a href="{{ url_for('dashboard') }}">Dashboard</a>
+<a href="/logout">Logout</a>
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+<h2>Predict Food Delivery Time</h2>
+<p>AI-powered fast & accurate delivery prediction system</p>
+
+<a href="{{ url_for('login') }}">
+<button>Get Started</button>
+</a>
+</div>
+
+<!-- MAIN SECTION -->
+
+<div class="section fade-section">
+
+<div class="glass-card">
+<h2>About the Model</h2>
+
+<p>
+This system uses Machine Learning to estimate delivery time based on distance, traffic, order type, weather, and preparation time.
+</p>
+
+<p style="margin-top:10px;">
+It improves customer experience by providing <span class="highlight">accurate delivery predictions</span>.
+</p>
+
+</div>
+
+<div class="flex fade-section">
+
+<div class="glass-card" style="flex:1;">
+<h2>Algorithms Used</h2>
+
+<ul class="algo-list">
+<li>Linear Regression</li>
+<li>Decision Tree</li>
+<li>Random Forest</li>
+<li>KNN Regressor</li>
+<li>Gradient Boosting</li>
+<li class="highlight">XGBoost ⭐</li>
+<li>LightGBM</li>
+</ul>
+
+<p style="margin-top:15px;">
+<span class="highlight">XGBoost</span> gives the best performance.
+</p>
+
+</div>
+
+<div class="glass-card" style="flex:1;">
+<h2>Model Performance</h2>
+
+<table>
+<tr>
+<th>Algorithm</th>
+<th>MAE</th>
+<th>RMSE</th>
+<th>R2</th>
+</tr>
+
+<tr><td>Linear Regression</td><td>6.13</td><td>7.71</td><td>0.31</td></tr>
+<tr><td>Decision Tree</td><td>7.90</td><td>10.28</td><td>-0.22</td></tr>
+<tr><td>Random Forest</td><td>6.00</td><td>7.65</td><td>0.32</td></tr>
+<tr><td>KNN</td><td>6.09</td><td>7.79</td><td>0.29</td></tr>
+<tr><td>Gradient Boost</td><td>5.60</td><td>7.10</td><td>0.41</td></tr>
+
+<tr class="best">
+<td><b>XGBoost ⭐</b></td>
+<td><b>5.59</b></td>
+<td><b>7.10</b></td>
+<td><b>0.41</b></td>
+</tr>
+
+<tr><td>LightGBM</td><td>5.59</td><td>7.10</td><td>0.41</td></tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- XGBOOST EXPLANATION -->
+
+<div class="glass-card fade-section">
+<h2>Why XGBoost Performed Best ⭐</h2>
+
+<div class="features">
+
+<div class="feature-box">
+<h3>🔬 Technical Advantage</h3>
+<p>
+XGBoost is an advanced ensemble learning algorithm based on gradient boosting. It builds models sequentially, where each new model corrects the errors of previous ones. It uses regularization techniques to prevent overfitting and handles missing values efficiently.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>⚙️ Performance Efficiency</h3>
+<p>
+It uses optimized parallel processing and tree pruning techniques, making it faster and more efficient compared to traditional algorithms like Decision Trees and Random Forest.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>📊 Better Accuracy</h3>
+<p>
+XGBoost achieved the lowest MAE and RMSE values and highest R² score, meaning it predicts delivery time more accurately than other models.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>💡 Practical Reason</h3>
+<p>
+In real-world food delivery scenarios, multiple factors interact in complex ways. XGBoost captures these non-linear relationships better, resulting in more reliable predictions even under uncertain conditions.
+</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<!-- FOOD SECTION - STARTUP STYLE -->
+
+<div class="glass-card fade-section">
+<h2>Explore Delicious Food 🍔🍕🍹</h2>
+
+<div class="food-container">
+
+<div class="food-text">
+
+<p>
+Experience a wide variety of food categories delivered faster using AI prediction.
+</p>
+
+<ul class="food-points">
+<li>🍟 Snacks & Fast Food</li>
+<li>🍱 Meals & Combos</li>
+<li>🍲 Buffet & Family Packs</li>
+<li>🥤 Refreshing Drinks</li>
+<li>🍰 Desserts & Specials</li>
+</ul>
+
+</div>
+
+<div class="food-image">
+<img src="https://thumbs.dreamstime.com/b/table-variety-food-drink-buffet-smorgasbord-potluck-assortment-table-variety-food-drink-buffet-305536687.jpg">
+</div>
+
+</div>
+
+</div>
+
+<!-- TECH STACK -->
+
+<div class="glass-card fade-section">
+<h2>Tech Stack</h2>
+
+<div class="tech">
+<span>Python</span>
+<span>Flask</span>
+<span>Machine Learning</span>
+<span>Scikit-learn</span>
+<span>XGBoost</span>
+<span>LightGBM</span>
+<span>HTML</span>
+<span>CSS</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- INPUT FEATURES -->
+
+<div class="glass-card fade-section">
+<h2>Input Features Used 📥</h2>
+
+<div class="features">
+
+<div class="feature-box">
+<h3>👤 Customer & Order</h3>
+<p>Age, rating, and type of meal selected.</p>
+</div>
+
+<div class="feature-box">
+<h3>📍 Distance Factors</h3>
+<p>Distance between restaurant and delivery location calculated using latitude & longitude.</p>
+</div>
+
+<div class="feature-box">
+<h3>🚗 Delivery Factors</h3>
+<p>Type of delivery vehicle used for transporting the order.</p>
+</div>
+
+<div class="feature-box">
+<h3>⭐ Ratings</h3>
+<p>Delivery partner ratings which influence speed and efficiency.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- HIDDEN FEATURES -->
+
+<div class="glass-card fade-section">
+<h2>Understanding Hidden Factors 🧠</h2>
+
+<p>
+In some cases, the model predicts higher delivery time even for shorter distances. This happens because Machine Learning models capture hidden patterns in the data.
+</p>
+
+<ul class="food-points">
+
+<li>🚦 Traffic conditions (not directly given but indirectly learned)</li>
+<li>📍 Restaurant location patterns</li>
+<li>⏱️ Preparation delays</li>
+<li>🌆 Area-based delivery complexity</li>
+
+</ul>
+
+<p style="margin-top:15px;">
+Although traffic is not explicitly provided as an input feature, the model uses <b>latitude and longitude</b> to learn indirect patterns. This allows it to understand real-world delivery challenges and make smarter predictions.
+</p>
+
+</div>
+
+
+
+<!-- WHY CHOOSE US -->
+
+<div class="glass-card fade-section">
+<h2>Why Choose Our System 🚀</h2>
+
+<div class="features">
+
+<div class="feature-box">
+<h3>⚡ Fast Predictions</h3>
+<p>Get instant delivery time predictions powered by optimized ML models.</p>
+</div>
+
+<div class="feature-box">
+<h3>🎯 High Accuracy</h3>
+<p>XGBoost ensures the most accurate delivery estimates among all models.</p>
+</div>
+
+<div class="feature-box">
+<h3>📊 Data Driven</h3>
+<p>Predictions are based on real-world features like traffic, distance, and weather.</p>
+</div>
+
+<div class="feature-box">
+<h3>💡 Smart Experience</h3>
+<p>Enhances user satisfaction and delivery efficiency.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- FUTURE SCOPE -->
+
+<div class="glass-card fade-section">
+<h2>Future Enhancements 🌟</h2>
+
+<ul class="food-points">
+<li>📍 Real-time GPS tracking integration</li>
+<li>📱 Mobile app deployment</li>
+<li>🤖 Deep learning based predictions</li>
+<li>🌐 Integration with food delivery platforms</li>
+<li>📈 Live dashboard analytics</li>
+</ul>
+
+</div>
+
+
+<footer>
+<p>© 2026 Food Delivery Prediction System</p>
+</footer>
+
+<!-- FADE SCRIPT -->
+
+<script>
+
+const faders = document.querySelectorAll('.fade-section');
+
+window.addEventListener('scroll', () => {
+faders.forEach(el => {
+const rect = el.getBoundingClientRect();
+if(rect.top < window.innerHeight - 100){
+el.classList.add('show');
+}
+});
+});
+
+</script>
+
+</body>
+</html>
+
+
