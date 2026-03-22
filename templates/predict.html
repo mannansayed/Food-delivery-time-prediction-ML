@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Food Delivery Time Prediction</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
+}
+
+/* NAVBAR */
+
+.navbar{
+width:100%;
+padding:15px 40px;
+background:rgba(0,0,0,0.8);
+color:white;
+position:fixed;
+top:0;
+z-index:1000;
+display:flex;
+justify-content:center;
+font-size:20px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+/* BACKGROUND */
+
+body{
+background-image:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+}
+
+/* MAIN FORM SECTION */
+
+.main{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding-top:80px;
+}
+
+.container{
+width:480px;
+background:rgba(255,255,255,0.95);
+padding:40px;
+border-radius:15px;
+box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+/* HEADING */
+
+.container h2{
+text-align:center;
+margin-bottom:25px;
+color:#ff4b2b;
+font-size:26px;
+}
+
+/* INPUTS */
+
+.form-group{
+margin-bottom:18px;
+}
+
+label{
+font-size:14px;
+font-weight:600;
+display:block;
+margin-bottom:6px;
+color:#333;
+}
+
+input, select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+transition:0.3s;
+}
+
+input:focus, select:focus{
+border-color:#ff4b2b;
+box-shadow:0 0 8px rgba(255,75,43,0.4);
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+background:linear-gradient(90deg,#ff4b2b,#ff6f61);
+border:none;
+color:white;
+font-size:16px;
+border-radius:25px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* RESULT */
+
+.result{
+margin-top:20px;
+padding:18px;
+background:#f5f5f5;
+border-radius:10px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+color:#333;
+animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;}
+}
+
+/* COMMON SECTION */
+
+.section{
+padding:60px 80px;
+text-align:center;
+background:rgba(0,0,0,0.7);
+margin-top:40px;
+}
+
+.section h2{
+margin-bottom:20px;
+font-size:28px;
+}
+
+/* IMAGE SECTION */
+
+.image-box img{
+width:80%;
+border-radius:15px;
+margin-top:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* GRID */
+
+.grid{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.card{
+width:220px;
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:#ff4b2b;
+}
+
+/* VEHICLE IMAGE */
+
+.vehicle-img{
+width:60%;
+border-radius:10px;
+margin-top:20px;
+}
+
+/* TEXT */
+
+.section p{
+max-width:900px;
+margin:auto;
+line-height:1.7;
+font-size:16px;
+margin-top:15px;
+}
+
+/* FADE ANIMATION */
+
+.fade-section{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.8s ease;
+}
+
+.fade-section.active{
+opacity:1;
+transform:translateY(0);
+}
+
+
+/* FLEX LAYOUT */
+
+.flex-box{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.flex-box.reverse{
+flex-direction:row-reverse;
+}
+
+/* TEXT */
+
+.text{
+max-width:500px;
+text-align:left;
+}
+
+.text ul{
+margin-top:15px;
+line-height:1.8;
+}
+
+/* IMAGE */
+
+.image img{
+width:350px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* GLASS CARD */
+
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+border-radius:12px;
+}
+
+/* SECTION IMPROVE */
+
+.section{
+padding:70px 60px;
+}
+
+/* DARK GLASS SECTION */
+
+.dark-section{
+padding:80px 60px;
+display:flex;
+justify-content:center;
+}
+
+/* CARD */
+
+.dark-card{
+width:90%;
+max-width:1100px;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(12px);
+border-radius:15px;
+padding:40px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:40px;
+box-shadow:0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* TEXT SIDE */
+
+.card-text{
+flex:1;
+}
+
+.card-text h2{
+font-size:26px;
+margin-bottom:15px;
+}
+
+.card-text p{
+font-size:15px;
+line-height:1.7;
+color:#ddd;
+margin-bottom:15px;
+}
+
+/* LIST ITEMS */
+
+.list-item{
+background:rgba(255,255,255,0.08);
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+transition:0.3s;
+}
+
+.list-item:hover{
+background:#ff4b2b;
+transform:translateX(8px);
+}
+
+/* IMAGE SIDE */
+
+.card-image img{
+width:260px;
+border-radius:12px;
+}
+
+/* FADE */
+
+.fade-section{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.8s ease;
+}
+
+.fade-section.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.category-row{
+display:flex;
+gap:20px;
+overflow-x:auto;
+padding-bottom:10px;
+scroll-behavior:smooth;
+}
+
+.category-row::-webkit-scrollbar{
+height:6px;
+}
+
+.category-row::-webkit-scrollbar-thumb{
+background:#ff4b2b;
+border-radius:10px;
+}
+
+.category-card{
+background:rgba(255,255,255,0.08);
+padding:18px;
+border-radius:12px;
+text-align:center;
+transition:0.3s;
+}
+
+.category-card:hover{
+background:#ff4b2b;
+transform:translateY(-8px) scale(1.04);
+box-shadow:0 10px 25px rgba(255,75,43,0.4);
+}
+
+.category-card:active{
+transform:scale(0.96);
+box-shadow:0 5px 15px rgba(0,0,0,0.3) inset;
+}
+
+
+.category-card h3{
+margin-bottom:8px;
+}
+
+.category-card p{
+font-size:14px;
+color:#ddd;
+}
+
+
+.points{
+list-style:none;
+margin-top:15px;
+line-height:1.9;
+}
+
+.points li{
+background:rgba(255,255,255,0.08);
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+transition:0.3s;
+}
+
+.points li:hover{
+background:#ff4b2b;
+transform:translateX(8px);
+}
+/* FOOTER */
+
+footer{
+background:black;
+color:white;
+text-align:center;
+padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+📊 Prediction Analysis
+</div>
+
+{% for m in get_flashed_messages() %}
+<script>alert("{{m}}")</script>
+{% endfor %}
+
+<!-- FORM -->
+
+<div class="main">
+
+<div class="container">
+
+<h2>🍔 Delivery Time Prediction</h2>
+
+<form action="{{ url_for('predict') }}" method="post">
+
+<div class="form-group">
+<label>Delivery Person Age</label>
+<input type="number" name="age" placeholder="Enter age" required>
+</div>
+
+<div class="form-group">
+<label>Delivery Ratings</label>
+<input type="number" step="0.1" name="ratings" placeholder="Example: 4.5" required>
+</div>
+
+<div class="form-group">
+<label>Distance (KM)</label>
+<input type="number" step="0.1" name="distance" placeholder="Enter distance" required>
+</div>
+
+<div class="form-group">
+<label>Type of Order</label>
+<select name="order_type" required>
+<option value="">Select Order Type</option>
+<option value="buffet">Buffet</option>
+<option value="drinks">Drinks</option>
+<option value="meal">Meal</option>
+<option value="snack">Snack</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Vehicle Type</label>
+<select name="vehicle_type" required>
+<option value="">Select Vehicle</option>
+<option value="bicycle">Bicycle</option>
+<option value="electric_scooter">Electric Scooter</option>
+<option value="motorcycle">Motorcycle</option>
+<option value="scooter">Scooter</option>
+</select>
+</div>
+
+<button type="submit">Predict Delivery Time</button>
+
+</form>
+
+{% if prediction %}
+<div class="result">
+Estimated Delivery Time: {{ prediction }} Minutes
+</div>
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- FOOD SECTION -->
+<div class="dark-section fade-section">
+
+<div class="dark-card" style="flex-direction:column;">
+
+<h2 style="text-align:center;margin-bottom:20px;">🍽 Explore Delicious Food</h2>
+
+<p style="text-align:center;max-width:700px;margin:auto;margin-bottom:25px;">
+Our platform supports multiple types of food orders designed to match customer needs and optimize delivery prediction.
+</p>
+
+<!-- CATEGORY CARDS -->
+
+<div class="category-row">
+
+<div class="category-card">
+<h3>🍛 Meal</h3>
+<p>Complete food packages ideal for lunch and dinner orders.</p>
+</div>
+
+<div class="category-card">
+<h3>🥤 Drinks</h3>
+<p>Beverages including juices, soft drinks, and refreshers.</p>
+</div>
+
+<div class="category-card">
+<h3>🍱 Buffet</h3>
+<p>Bulk orders suitable for events and large gatherings.</p>
+</div>
+
+<div class="category-card">
+<h3>🍟 Snacks</h3>
+<p>Quick bites and light food items for instant cravings.</p>
+</div>
+
+</div>
+
+<p style="margin-top:25px;text-align:center;max-width:750px;margin-left:auto;margin-right:auto;">
+These food categories influence preparation time and complexity, which plays a significant role in predicting accurate delivery time using machine learning models.
+</p>
+
+<!-- IMAGE -->
+
+<div class="card-image" style="margin-top:30px;">
+<img src="https://img.freepik.com/premium-photo/christmas-buffet-with-food-drinks-guests-enjoy-created-with-generative-ai_124507-168849.jpg?w=740">
+</div>
+
+</div>
+
+</div>
+
+<!-- VEHICLE SECTION -->
+
+<div class="dark-section fade-section">
+
+<div class="dark-card">
+
+<div class="card-image">
+<img src="https://cdni.autocarindia.com/ExtraImages/20220909010320_Electric%20bike%20and%20scooter_Collage08_09_22_001.jpg">
+</div>
+
+<div class="card-text">
+
+<h2>🚗 Delivery Vehicles</h2>
+
+<p>
+Delivery efficiency varies based on the type of vehicle used for transporting orders.
+</p>
+
+<div class="list-item">🚲 Bicycle – Best for short eco-friendly delivery</div>
+<div class="list-item">⚡ Electric Scooter – Efficient in city traffic</div>
+<div class="list-item">🏍 Motorcycle – Fastest for long distances</div>
+<div class="list-item">🛵 Scooter – Balanced city performance</div>
+
+<p>
+Vehicle selection plays a crucial role in determining delivery time, especially in urban environments.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RATINGS -->
+<div class="dark-section fade-section">
+
+<div class="dark-card">
+
+<div class="card-text">
+
+<h2>⭐ Delivery Ratings Insight</h2>
+
+<ul class="points">
+<li>✔ Most delivery partners maintain ratings between <b>4.0 – 5.0</b></li>
+<li>✔ Indicates high efficiency and customer satisfaction</li>
+<li>✔ Ratings are measured on a scale of 5</li>
+<li>✔ Higher ratings often correlate with faster delivery performance</li>
+<li>✔ Plays a key role in prediction accuracy</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MODEL INFO -->
+
+<div class="dark-section fade-section">
+
+<div class="dark-card">
+
+<div class="card-text">
+
+<h2>🤖 How Prediction Works</h2>
+
+<ul class="points">
+
+<li>✔ Uses features like age, ratings, distance, order type, and vehicle type</li>
+<li>✔ Learns patterns from historical delivery data</li>
+<li>✔ Captures complex relationships between multiple factors</li>
+<li>✔ Uses machine learning model (XGBoost) for high accuracy</li>
+<li>✔ Considers hidden patterns derived from latitude & longitude</li>
+<li>✔ Predicts delivery time based on real-world conditions</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<script>
+const faders = document.querySelectorAll('.fade-section');
+
+window.addEventListener('scroll', () => {
+faders.forEach(el => {
+const rect = el.getBoundingClientRect();
+if(rect.top < window.innerHeight - 100){
+el.classList.add('active');
+}
+});
+});
+</script>
+
+
+<footer>
+© 2026 Food Delivery Prediction System | Built with Machine Learning 🚀
+</footer>
+</footer>
+</body>
+</html>
+
